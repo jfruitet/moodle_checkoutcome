@@ -1,0 +1,192 @@
+==================================================================================================
+2014102801 : checkoutcome-1.4.1
+Jean FRUITET
+Portage Moodle 2.7
+Portage Moodle 2.5 à partir de la version checkoutcome-1.3.2
+http://moodlemoot2013.univ-bordeaux.fr/course/view.php?id=78
+Améliorations :
+	- Correction warnings locallib.php et file_api.php
+	- Modification de la saisie / affichage des guillemets et apostrophes (file_api.php)
+	- Correction d'un bug empêchant d'afficher la liste des objectifs utilisés dans un cours (locallib.php)
+	- Correction des capacités pour que les enseignants avec droit d'édition puissent ajouter de nouveaux objectifs (db/access.php)
+
+==================================================================================================
+20130422 : checkoutcome-1.3.2
+Matthieu POUPLIN
+Dates :
+	- Affichage des dates en français
+	- Correction warnings première connexion sur un livret
+==================================================================================================
+20130418 : checkoutcome-1.3.1
+Matthieu POUPLIN
+Permissions :
+	- Re-définition des permissions pour le rôle admin
+Evaluation enseignant :
+	- correction des permissions
+Aperçu :
+	- Affichage de l'objectif compteur
+	- Affichage des barêmes
+==================================================================================================
+20130415 : checkoutcome-1.3.0
+Matthieu POUPLIN
+Correction bug consignes/appréciations
+Modifications du bilan :
+	-afficher toutes les périodes en une seule vue
+	-pouvoir choisir d'afficher les pourcentages ou un code couleur
+	-pouvoir filtrer par groupe d'étudiants et étudiant
+	-les étudiants ont accès à leur propre bilan
+	-bilan des compteurs de gestes
+Modifications export bilan :
+	-pouvoir exporter toutes les périodes
+	-afficher les compteurs
+	-séparateur ";"
+Evaluation enseignant :
+	-sauvegarde automatique lorsque l'on change une note (comme pour les étudiants)
+Modifications paramètrages :
+	-ajout d'un nom abrégé pour les groupes d'objectifs et périodes afin de pouvoir les trier
+	-pouvoir vérouiller des périodes, c'est à dire que personne ne pourra les modifier tant que le verrou est actif
+	-les dates ne sont plus obligatoires dans les périodes
+Carnet de notes :
+	-la meilleur note d'un enseignant est remontée dans le carnet de note pour chaque objectif
+Moodle 2.4 :
+	-adaptation du module à la version 2.4 de moodle
+Permissions :
+	-Re-définition des permissions pour chaque rôle
+==================================================================================================
+20130117 : checkoutcome-1.2.7
+Matthieu POUPLIN
+correction du bug d'affichage dans le bilan, on retrouve bien tout les barèmes, même s'ils sont différents
+==================================================================================================
+20130111 : checkoutcome-1.2.6
+Matthieu POUPLIN
+modification du fichier install.xml afin de créer la bonne base de données dès l'installation du module
+plus besoin de passer par l'upgrade
+==================================================================================================
+20121218 : checkoutcome-1.2.5
+Olivier LEBORGNE
+ajout d'un champ de description de la période pour l'étudiant
+ajout description etudiant aux exports pdf
+reagencement barre titre de page de notation
+correction bug : eviter redirection apres validation des formulaires objectifs de periode
+ et description etudiant
+fin backup/restore
+debut backup/restore
+ajout compteur dans les exports
+ajout compteur cote ecran de notation
+ajout compteur cote ecran de gestion
+correction bug : si pas de groupe, on affichait pas la liste des etudiants
+==================================================================================================
+20121122 : checkoutcome-1.2.4
+Olivier LEBORGNE
+modification position du lien objectifs de semestre sur page de notation
+changement du lien vers un ressource : via un image
+==================================================================================================
+20121122 : checkoutcome-1.2.3
+Olivier LEBORGNE
+gestion des objectifs de periodes
+pour professeur editeur et non editeur
+pour etudiant
+inclus dans export pdf
+ajout lien href sur objectifs dans page de notation
+suppression lien href
+notation etudiant : blocage apres note du prof
+notation etudiant : mise a jour en ajax de la date
+==================================================================================================
+20121112 : checkoutcome-1.2.2
+Olivier LEBORGNE
+gestion des semestres
+onglet de gestion, ajouter, supprimer, modifier
+liste de choix dans la page view
+sauvegarde des notes et historiques des notes
+adaptation des exports pdf et portfolio
+adaptation du bilan et export
+==================================================================================================
+20121031 : checkoutcome-1.2.1
+Olivier LEBORGNE
+re-modification des tables , pour le livret de l interne
+==================================================================================================
+20121030 : checkoutcome-1.2.0
+Olivier LEBORGNE
+modification des tables , pour le livret de l interne
+==================================================================================================
+20121030 : checkoutcome-1.1.5
+Olivier LEBORGNE
+prise en compte des groupes et de groupements
+==================================================================================================
+20121017 : checkoutcome-1.1.4
+Olivier LEBORGNE
+modification checkoutcome.js
+==================================================================================================
+20120810 : checkoutcome-1.1.3
+Olivier LEBORGNE
+correction bug : ecran ajout objectifs, certaines requetes semblent trop longues pour le serveur
+notamment quand on selectionne une longue liste d objectifs, tentative de les raccourcir 
+==================================================================================================
+20120810 : checkoutcome-1.1.2
+Olivier LEBORGNE
+correction bug : ecran ajout objectifs, check/uncheck all ne fonctionnait plus
+==================================================================================================
+20120809 : checkoutcome-1.1.1
+Olivier LEBORGNE
+apres nettoyage du code : ajout de commentaires, suppression de zone de code commentee, etc...
+==================================================================================================
+20120809 : checkoutcome-1.1.0
+Olivier LEBORGNE
+refonte ecran des objectifs : ajout checkbox
+modification export mahara : retour de christian
+ajout color picker
+limitation taille commentaire
+ajout ancrage lors de l'ajout commentaire ou document etc
+==================================================================================================
+20120803 : checkoutcome-1.0.0
+Olivier LEBORGNE
+modification notation prof, ajout marqueur de date et nom
+correction divers bugs
+ajout export leap
+==================================================================================================
+20120729 : checkoutcome-0.0.8
+Olivier LEBORGNE
+corrections bugs version 0.0.7
+==================================================================================================
+20120726 : checkoutcome-0.0.7
+Olivier LEBORGNE
+ajustement css pour le tableau de notation
+finalisation export csv 
+modification du report selon demande de florence
+correction get_items: classement par categories
+ajout export leap : non fonctionnel, a finaliser
+ajout export pdf
+==================================================================================================
+20120718 : checkoutcome-0.0.6
+Olivier LEBORGNE
+module export csv termine
+troisieme partie des modifications
+deuxieme partie des modifications
+premieres modifs suite aux remarques de florence et christian
+==================================================================================================
+20120716 : checkoutcome-0.0.5
+Olivier LEBORGNE
+ajout module export
+calcul vs outcome et category ok
+ajout module Report
+==================================================================================================
+20120703 : checkoutcome-0.0.4
+Olivier LEBORGNE
+evalutaion par prof ok
+fiche evaluation des eleves par prof creees
+==================================================================================================
+20120702 : checkoutcome-0.0.3
+Olivier LEBORGNE
+separation des trois onglets de parametrage
+mise en place de l apercu pour les enseignants
+groupes au lieu de categories
+==================================================================================================
+20120627 : checkoutcome-0.0.2
+Olivier LEBORGNE
+Page d'auto-evaluation avec html_table
+==================================================================================================
+20120621 : checkoutcome-0.0.1
+Olivier LEBORGNE
+first tag
+==================================================================================================
+

@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/checkoutcome/db" VERSION="20101203" COMMENT="XMLDB file for Moodle mod/checkoutcome"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="checkoutcome" COMMENT="Checkoutcome module" NEXT="checkoutcome_category">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="course"/>
+        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Course checkoutcome activity belongs to" PREVIOUS="id" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="name field for moodle instances" PREVIOUS="course" NEXT="intro"/>
+        <FIELD NAME="intro" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" COMMENT="General introduction of the checkoutcome activity" PREVIOUS="name" NEXT="introformat"/>
+        <FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="Format of the intro field (MOODLE, HTML, MARKDOWN...)" PREVIOUS="intro" NEXT="timecreated"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="introformat" NEXT="timemodified"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="timecreated"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="checkoutcome_category" COMMENT="Checkoutcome categories" PREVIOUS="checkoutcome" NEXT="checkoutcome_display">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="checkoutcome"/>
+        <FIELD NAME="checkoutcome" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Checkoutcome module category belongs to" PREVIOUS="id" NEXT="shortname"/>
+		<FIELD NAME="shortname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="shortname field for moodle instances" PREVIOUS="checkoutcome" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="name field for moodle instances" PREVIOUS="shortname" NEXT="description"/>
+        <FIELD NAME="description" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" COMMENT="General description of the checkoutcome category" PREVIOUS="name" NEXT="timecreated"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="description" NEXT="timemodified"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="timecreated"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="checkoutcome" UNIQUE="false" FIELDS="checkoutcome"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="checkoutcome_display" COMMENT="checkoutcome display" PREVIOUS="checkoutcome_category" NEXT="checkoutcome_item">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="checkoutcome"/>
+        <FIELD NAME="checkoutcome" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Checkoutcome module that display type belongs to" PREVIOUS="id" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="name field for moodle instances" PREVIOUS="checkoutcome" NEXT="description"/>
+        <FIELD NAME="description" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" COMMENT="General description of the checkoutcome display type" PREVIOUS="name" NEXT="color"/>
+        <FIELD NAME="color" TYPE="char" LENGTH="6" NOTNULL="true" SEQUENCE="false" COMMENT="background color field for the display" PREVIOUS="description" NEXT="iswhitefont"/>
+        <FIELD NAME="iswhitefont" TYPE="int" LENGTH="4" NOTNULL="false" SEQUENCE="false" COMMENT="white fonct color or not" PREVIOUS="color" NEXT="timecreated"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="iswhitefont" NEXT="timemodified"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="timecreated"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="checkoutcome" UNIQUE="false" FIELDS="checkoutcome"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="checkoutcome_item" COMMENT="Checkoutcome item" PREVIOUS="checkoutcome_display" NEXT="checkoutcome_document">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="checkoutcome"/>
+        <FIELD NAME="checkoutcome" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Checkoutcome this item is linked to" PREVIOUS="id" NEXT="itemnumber"/>
+        <FIELD NAME="itemnumber" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Grade item this item is linked to" PREVIOUS="checkoutcome" NEXT="gradeitem"/>
+        <FIELD NAME="gradeitem" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Grade item this item is linked to" PREVIOUS="itemnumber" NEXT="scaleid"/>
+        <FIELD NAME="scaleid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="scale id for student self evaluation" PREVIOUS="gradeitem" NEXT="display"/>		
+        <FIELD NAME="display" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" COMMENT="Display for this item" PREVIOUS="scaleid" NEXT="category"/>
+        <FIELD NAME="category" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" COMMENT="Category this item is linked to" PREVIOUS="display" NEXT="timecreated"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="category" NEXT="timemodified"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="timecreated" NEXT="countgoal"/>
+		<FIELD NAME="countgoal" TYPE="int" LENGTH="4" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="timemodified" NEXT="resource"/>
+		<FIELD NAME="resource" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" PREVIOUS="countgoal"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="gradeitem" UNIQUE="false" FIELDS="gradeitem"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="checkoutcome_document" COMMENT="Document" PREVIOUS="checkoutcome_item" NEXT="checkoutcome_periods">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" COMMENT="id of the table" NEXT="gradeid"/>
+        <FIELD NAME="gradeid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="id" NEXT="description"/>
+        <FIELD NAME="description" TYPE="text" LENGTH="small" NOTNULL="true" SEQUENCE="false" COMMENT="The description, metadata about the document" PREVIOUS="gradeid" NEXT="url"/>
+        <FIELD NAME="url" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="The URL of the document" PREVIOUS="description" NEXT="fileid"/>
+        <FIELD NAME="fileid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="The id of the stored file" PREVIOUS="url" NEXT="title"/>
+        <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="The title of de URL" PREVIOUS="fileid" NEXT="timecreated" />
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="title" NEXT="timemodified"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="timecreated" />
+	  </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Primary key for document"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="indexgrade" UNIQUE="false" FIELDS="gradeid"/>
+      </INDEXES>
+    </TABLE>
+	<TABLE NAME="checkoutcome_periods" COMMENT="Periods" PREVIOUS="checkoutcome_document" NEXT="checkoutcome_period_goals">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="checkoutcome"/>
+        <FIELD NAME="checkoutcome" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="id" NEXT="shortname"/>
+		<FIELD NAME="shortname" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="shortname field for moodle instances" PREVIOUS="checkoutcome" NEXT="name"/>
+        <FIELD NAME="name" TYPE="text" LENGTH="big" NOTNULL="true" SEQUENCE="false"  PREVIOUS="shortname" NEXT="lockperiod"/>
+		<FIELD NAME="lockperiod" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="name" NEXT="description"/>	
+        <FIELD NAME="description" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" PREVIOUS="lockperiod" NEXT="startdate"/>
+        <FIELD NAME="startdate" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" PREVIOUS="description" NEXT="enddate"/>
+        <FIELD NAME="enddate" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" PREVIOUS="startdate" NEXT="timecreated" />
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="enddate" NEXT="timemodified"/>		
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="timecreated" />
+	  </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Primary key for period"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="checkoutcome_per_check_index" UNIQUE="false" FIELDS="checkoutcome"/>
+      </INDEXES>
+    </TABLE>
+	<TABLE NAME="checkoutcome_period_goals" COMMENT="Period goal" PREVIOUS="checkoutcome_periods" NEXT="checkoutcome_selfgrading">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="period"/>
+        <FIELD NAME="period" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="id" NEXT="userid"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"  PREVIOUS="period" NEXT="usermodified"/>
+        <FIELD NAME="usermodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="userid" NEXT="goal"/>
+        <FIELD NAME="goal" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" PREVIOUS="usermodified" NEXT="appraisal"/>
+        <FIELD NAME="appraisal" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" PREVIOUS="goal" NEXT="studentsdescription" />
+		<FIELD NAME="studentsdescription" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" PREVIOUS="appraisal" NEXT="timecreated" />
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="studentsdescription" NEXT="timemodified"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="timecreated" />
+	  </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Primary key for period goal"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="checkoutcome_per_g_per_index" UNIQUE="false" FIELDS="period"/>
+      </INDEXES>
+    </TABLE>
+	<TABLE NAME="checkoutcome_selfgrading" COMMENT="Checkoutcome selfgrading" PREVIOUS="checkoutcome_period_goals" NEXT="checkoutcome_selfgrad_histo">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="checkoutcomeitem"/>
+        <FIELD NAME="checkoutcomeitem" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Checkoutcome item this table is linked to" PREVIOUS="id" NEXT="userid"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" PREVIOUS="checkoutcomeitem" NEXT="grade"/>
+        <FIELD NAME="grade" TYPE="int" LENGTH="4" NOTNULL="false" SEQUENCE="false" COMMENT="graded by student himself" PREVIOUS="userid" NEXT="comment"/>
+        <FIELD NAME="comment" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" COMMENT="Comment added by student" PREVIOUS="grade" NEXT="commenttime"/>        
+        <FIELD NAME="commenttime" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="comment" NEXT="timecreated"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="commenttime" NEXT="timemodified"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="timecreated" NEXT="period"/>
+		<FIELD NAME="period" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" PREVIOUS="timemodified" NEXT="count"/>
+		<FIELD NAME="count" TYPE="int" LENGTH="4" NOTNULL="false" SEQUENCE="false" PREVIOUS="period" NEXT="counttime"/>
+		<FIELD NAME="counttime" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" PREVIOUS="count"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="checkoutcomeitem" UNIQUE="false" FIELDS="checkoutcomeitem"/>
+      </INDEXES>
+    </TABLE>
+	<TABLE NAME="checkoutcome_selfgrad_histo" COMMENT="selfgrading history" PREVIOUS="checkoutcome_selfgrading" NEXT="checkoutcome_teachergrading">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="oldid"/>
+        <FIELD NAME="oldid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="id" NEXT="action"/>
+        <FIELD NAME="action" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"  PREVIOUS="oldid" NEXT="source"/>
+        <FIELD NAME="source" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" PREVIOUS="action" NEXT="grade"/>
+        <FIELD NAME="grade" TYPE="int" LENGTH="4" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="source" NEXT="count"/>
+        <FIELD NAME="count" TYPE="int" LENGTH="4" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="grade" NEXT="counttime" />
+		<FIELD NAME="counttime" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="count" NEXT="comment" />
+		<FIELD NAME="comment" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" PREVIOUS="counttime" NEXT="commenttime" />
+		<FIELD NAME="commenttime" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="comment" NEXT="timecreated" />
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="commenttime"/>
+	  </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Primary key for teachergrading history"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="checkoutcome_sgrad_h_oldid_index" UNIQUE="false" FIELDS="oldid"/>
+      </INDEXES>
+    </TABLE>
+	<TABLE NAME="checkoutcome_teachergrading" COMMENT="teachergrading" PREVIOUS="checkoutcome_selfgrad_histo" NEXT="checkoutcome_teachgrad_histo">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="checkoutcomeitem"/>
+        <FIELD NAME="checkoutcomeitem" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="id" NEXT="userid"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"  PREVIOUS="checkoutcomeitem" NEXT="period"/>
+        <FIELD NAME="period" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="userid" NEXT="grade"/>
+        <FIELD NAME="grade" TYPE="int" LENGTH="4" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="period" NEXT="usermodified"/>
+        <FIELD NAME="usermodified" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="grade" NEXT="comment" />
+		<FIELD NAME="comment" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" PREVIOUS="usermodified" NEXT="commenttime" />
+		<FIELD NAME="commenttime" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="comment" NEXT="timecreated" />
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="commenttime" NEXT="timemodified"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="timecreated" />
+	  </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Primary key for teachergrading"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="checkoutcome_tgrad_chitem_index" UNIQUE="false" FIELDS="checkoutcomeitem"/>
+      </INDEXES>
+    </TABLE>
+	<TABLE NAME="checkoutcome_teachgrad_histo" COMMENT="teachergrading history" PREVIOUS="checkoutcome_teachergrading">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="oldid"/>
+        <FIELD NAME="oldid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="id" NEXT="action"/>
+        <FIELD NAME="action" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"  PREVIOUS="oldid" NEXT="source"/>
+        <FIELD NAME="source" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" PREVIOUS="action" NEXT="grade"/>
+        <FIELD NAME="grade" TYPE="int" LENGTH="4" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="source" NEXT="usermodified"/>
+        <FIELD NAME="usermodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="grade" NEXT="comment" />
+		<FIELD NAME="comment" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" PREVIOUS="usermodified" NEXT="commenttime" />
+		<FIELD NAME="commenttime" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" PREVIOUS="comment" NEXT="timecreated" />
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="commenttime"/>
+	  </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Primary key for teachergrading history"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="checkoutcome_tgrad_h_oldid_index" UNIQUE="false" FIELDS="oldid"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>
