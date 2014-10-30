@@ -3473,6 +3473,10 @@ class checkoutcome_class {
     	// Getting the list of outcomes for this course
     	//$outcomes = $DB->get_records('grade_outcomes',array('courseid' => $this->course->id),'shortname');
         $outcomes = null;
+        $params=array($this->course->id);
+        $sql="SELECT go.* FROM {grade_outcomes} as go, {grade_outcomes_courses} as gc WHERE go.id=gc.outcomeid AND gc.courseid=? ORDER BY go.id";
+        $outcomes=$DB->get_records_sql($sql, $params);
+		/*
 		$outcomes_course = $DB->get_records('grade_outcomes_courses',array('courseid' => $this->course->id));
 		if ($outcomes_course){
 			$params=array();
@@ -3495,6 +3499,7 @@ class checkoutcome_class {
             //exit;
 			$outcomes=$DB->get_records_sql($sql, $params);
 		}
+		*/
 
 		// DEBUG
 		//echo "<br />DEBUG :: locallib.php :: 3474 :: view_add_outcome()<br />\n";
