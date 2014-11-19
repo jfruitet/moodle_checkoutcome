@@ -35,12 +35,12 @@ if (!isset($plugin)) {
     $plugin = new stdClass();
 }
 // Used by M2.6 and above.
-$plugin->version  = 2014102801;  // The current module version (Date: YYYYMMDDXX)
+$plugin->version  = 2014102802;  // The current module version (Date: YYYYMMDDXX)
 $plugin->requires = 2010031900;
 $plugin->component = 'mod_checkoutcome';
 $plugin->cron     = 0;          // Period for cron to check this module (secs)
 $plugin->maturity = MATURITY_STABLE;
-$plugin->release  = '1.4.1 (Build from CheckOutcome 1.3.2 by JF)';
+$plugin->release  = '1.4.2 (Build from CheckOutcome 1.3.2 by JF)';
 $plugin->dependencies = NULL;
 
 if (!isset($module)) {

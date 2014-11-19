@@ -55,8 +55,11 @@ require_login($course, true, $cm);
 $PAGE->set_url($url);
 $PAGE->requires->css('/mod/checkoutcome/styles.css');
 
-
-$context = context_module::instance($cm->id);
+if ($CFG->version < 2011120100) {
+	$context = get_context_instance(CONTEXT_MODULE, $cm->id);
+} else {
+	$context = context_module::instance($cm->id);
+}
 
 $userid = 0;
 if (has_capability('mod/checkoutcome:updateown', $context)) {

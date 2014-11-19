@@ -59,12 +59,12 @@ require_login($course, true, $cm);
 $PAGE->set_url($url);
 $PAGE->requires->css('/mod/checkoutcome/styles.css');
 
-
 if ($CFG->version < 2011120100) {
     $context = get_context_instance(CONTEXT_MODULE, $cm->id);
 } else {
     $context = context_module::instance($cm->id);
 }
+
 $userid = $USER->id;
 if (!has_capability('mod/checkoutcome:updateown', $context)) {
     echo get_string('error_update', 'checkoutcome'); // 'Error: you do not have permission to update this checklist';

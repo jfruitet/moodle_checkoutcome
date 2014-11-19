@@ -299,12 +299,12 @@ class checkoutcome_class {
     	$pageContent = optional_param('pageContent', null, PARAM_CLEANHTML);    	
     	
     	// Redirect ?
-    	if ($this->isGradingByStudent() || $this->isGradingByTeacher()) {
+     	if ($this->isGradingByStudent() || $this->isGradingByTeacher()) {
     		$currenttab = 'view';
      	} else {
      		$currenttab = 'preview';
       	}    	    	
-    	
+
     	// Process actions
     	if ($this->canupdateown() || $this->studentid) {
     		$this->process_view_actions();
@@ -3467,45 +3467,13 @@ class checkoutcome_class {
     	global $OUTPUT, $DB, $PAGE;
     	
     	$edit_page = new moodle_url('/mod/checkoutcome/edit.php');
-		// DEBUG
-		//echo "<br />DEBUG :: locallib.php :: 3471 :: view_add_outcome()<br />COURSE : ".$this->course->id."\n";
 
     	// Getting the list of outcomes for this course
-    	//$outcomes = $DB->get_records('grade_outcomes',array('courseid' => $this->course->id),'shortname');
         $outcomes = null;
         $params=array($this->course->id);
         $sql="SELECT go.* FROM {grade_outcomes} as go, {grade_outcomes_courses} as gc WHERE go.id=gc.outcomeid AND gc.courseid=? ORDER BY go.id";
         $outcomes=$DB->get_records_sql($sql, $params);
-		/*
-		$outcomes_course = $DB->get_records('grade_outcomes_courses',array('courseid' => $this->course->id));
-		if ($outcomes_course){
-			$params=array();
-			$where='';
-			foreach($outcomes_course as $outcome_course){
-				$params[]=$outcome_course->outcomeid;
-				if (empty($where)){
-					$where .= ' (id=?) ';
-				}
-				else{
-                    $where .= ' OR (id=?) ';
-				}
-			}
 
-            $sql="SELECT * FROM {grade_outcomes} WHERE ".$where." ORDER BY id";
-
-			// DEBUG
-			//echo "<br />DEBUG :: locallib.php :: 3493 :: view_add_outcome()<br />SQL : $sql<br />\n";
-			//print_object($params);
-            //exit;
-			$outcomes=$DB->get_records_sql($sql, $params);
-		}
-		*/
-
-		// DEBUG
-		//echo "<br />DEBUG :: locallib.php :: 3474 :: view_add_outcome()<br />\n";
-		//print_object($outcomes);
-		//exit;
-    	
    		$this->view_header();
 
    		$jsmodule = array(
@@ -4312,8 +4280,7 @@ class checkoutcome_class {
     	$inactive = array();
     	$activated = array();
     
-    	
-    	if ($this->canupdateown()) {
+		if ($this->canupdateown()) {
     		$row[] = new tabobject('view', new moodle_url('/mod/checkoutcome/view.php', array('id' => $this->cm->id)), get_string('view', 'checkoutcome'));
     	} 
     	else if ($this->canpreview()) {
@@ -5064,6 +5031,12 @@ class checkoutcome_class {
 		return ($this->studentid != null && $this->canupdateother());
     }
     
+    function isGradingByManager() {
+    	//return ($this->studentid != null && !$this->canupdateown());
+		return ($this->studentid == null && $this->canupdateother());
+    }
+
+
    	function teacherHasGraded($item) {
     	if ($item[3] != null && $item[3]->grade != null && $item[3]->grade != 0) {
     		return true;

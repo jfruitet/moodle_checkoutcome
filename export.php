@@ -65,7 +65,6 @@ if ($CFG->version < 2011120100) {
     $context = context_module::instance($cm->id);
 }
 
-
 $userid = $USER->id;
 
 $chk = new checkoutcome_class($cm->id, $userid, $checkoutcome, $cm, $course, $studentid, null, $periodid);
