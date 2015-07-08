@@ -56,14 +56,4 @@ $module->maturity = $plugin->maturity;
 $module->release = $plugin->release;
 $module->dependencies = $plugin->dependencies;
 
-/*
-// Used by M2.5 and below.
-$module->version   = 2014102800;      // The current module version (Date: YYYYMMDDXX)
-$module->requires  = 2010031900;      // Requires this Moodle version
-$module->cron      = 0;               // Period for cron to check this module (secs)
-$module->component = 'mod_checkoutcome'; // To check on upgrade, that module sits in correct place
-$module->maturity = MATURITY_STABLE;
-$module->release = '1.4 (Build from CheckOutcome 1.3.2 by JF)';
-$module->dependencies = NULL;
-*/
 

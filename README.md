@@ -1,5 +1,5 @@
 Chckoutcomes
-======================
+============
 
 By Olivier Le Borgne <olivier.leborgne@univ-nantes.fr>
 
