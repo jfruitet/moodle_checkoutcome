@@ -1,4 +1,4 @@
-# CheckOutcomes plugin
+# CheckOutcomes plugin installation
 
 * Unzip the archive in ./mod/ directory of your Moodle server
 
@@ -14,4 +14,3 @@
   installed modules.
   His name is "Suivi d'objectifs" in french and "Outcomes follow-up"
   
-
