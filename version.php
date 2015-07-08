@@ -40,7 +40,7 @@ $plugin->requires = 2010031900;
 $plugin->component = 'mod_checkoutcome';
 $plugin->cron     = 0;          // Period for cron to check this module (secs)
 $plugin->maturity = MATURITY_STABLE;
-$plugin->release  = '1.4.2 (Build from CheckOutcome 1.3.2 by JF)';
+$plugin->release  = '1.4.2 (Fork by JF from CheckOutcome 1.3.2)';
 $plugin->dependencies = NULL;
 
 if (!isset($module)) {
